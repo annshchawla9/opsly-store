@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Opsly Store Design System
+   Color Palette: Blue (trust/professional) + Orange (energy/action)
+   Style: Modern SaaS, mobile-first, premium feel
+*/
+
+@layer base {
+  :root {
+    /* Background & Foreground */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+
+    /* Card - Premium white with subtle depth */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Deep Trust Blue */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Light Blue Tint */
+    --secondary: 214 95% 93%;
+    --secondary-foreground: 221 83% 40%;
+
+    /* Muted */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent - Vibrant Orange */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success Green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border & Input */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Sidebar (for potential future use) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 221 83% 53%;
+
+    /* Custom Opsly tokens */
+    --opsly-blue-50: 214 100% 97%;
+    --opsly-blue-100: 214 95% 93%;
+    --opsly-blue-500: 221 83% 53%;
+    --opsly-blue-600: 221 83% 45%;
+    --opsly-blue-700: 221 83% 40%;
+    
+    --opsly-orange-50: 34 100% 96%;
+    --opsly-orange-100: 34 100% 91%;
+    --opsly-orange-500: 25 95% 53%;
+    --opsly-orange-600: 21 90% 48%;
+
+    /* Priority colors */
+    --priority-critical: 0 84% 60%;
+    --priority-high: 25 95% 53%;
+    --priority-medium: 38 92% 50%;
+    --priority-low: 142 76% 36%;
+
+    /* Gradient tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%) 0%, hsl(221 83% 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(21 90% 48%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(142 71% 45%) 100%);
+
+    /* Shadow tokens */
+    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+    --shadow-card: 0 4px 20px -4px hsl(222 47% 11% / 0.08);
+    --shadow-phone: 0 25px 50px -12px hsl(222 47% 11% / 0.25);
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 221 83% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 221 83% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar for mobile feel */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 100px;
+  }
+}
+
+@layer utilities {
+  /* Phone container styling */
+  .phone-container {
+    max-width: 430px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: hsl(var(--background));
+    box-shadow: var(--shadow-phone);
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .phone-container {
+      min-height: 100vh;
+      border-left: 1px solid hsl(var(--border));
+      border-right: 1px solid hsl(var(--border));
+    }
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.2s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-hover:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Priority badge variants */
+  .priority-critical {
+    background: hsl(var(--priority-critical) / 0.1);
+    color: hsl(var(--priority-critical));
+    border: 1px solid hsl(var(--priority-critical) / 0.2);
+  }
+
+  .priority-high {
+    background: hsl(var(--priority-high) / 0.1);
+    color: hsl(var(--priority-high));
+    border: 1px solid hsl(var(--priority-high) / 0.2);
+  }
+
+  .priority-medium {
+    background: hsl(var(--priority-medium) / 0.1);
+    color: hsl(var(--priority-medium));
+    border: 1px solid hsl(var(--priority-medium) / 0.2);
+  }
+
+  .priority-low {
+    background: hsl(var(--priority-low) / 0.1);
+    color: hsl(var(--priority-low));
+    border: 1px solid hsl(var(--priority-low) / 0.2);
+  }
+
+  /* Tap target sizing */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Safe area padding for mobile */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Progress bar animation */
+  .progress-animate {
+    animation: progress-fill 1s ease-out forwards;
+  }
+
+  @keyframes progress-fill {
+    from {
+      width: 0%;
+    }
+  }
+
+  /* Subtle pulse for attention */
+  .pulse-subtle {
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
