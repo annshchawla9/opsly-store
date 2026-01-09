@@ -30,9 +30,7 @@ function clamp100(x: number) {
   return Math.max(0, Math.min(100, x));
 }
 
-// ✅ Smart refresh scheduler:
-// refresh right after :05 and :35 every hour (with buffer so cron finishes)
-function msUntilNext0535(bufferSeconds = 20) {
+function msUntilNext2050(bufferSeconds = 30) {
   const now = new Date();
   const next = new Date(now);
 
@@ -41,17 +39,18 @@ function msUntilNext0535(bufferSeconds = 20) {
   const ms = now.getMilliseconds();
 
   const bufferMs = bufferSeconds * 1000;
+  const elapsedMs = s * 1000 + ms;
 
-  if (m < 5 || (m === 5 && s * 1000 + ms < bufferMs)) {
-    next.setMinutes(5, 0, 0);
-  } else if (m < 35 || (m === 35 && s * 1000 + ms < bufferMs)) {
-    next.setMinutes(35, 0, 0);
+  if (m < 20 || (m === 20 && elapsedMs < bufferMs)) {
+    next.setMinutes(20, 0, 0);
+  } else if (m < 50 || (m === 50 && elapsedMs < bufferMs)) {
+    next.setMinutes(50, 0, 0);
   } else {
     next.setHours(now.getHours() + 1);
-    next.setMinutes(5, 0, 0);
+    next.setMinutes(20, 0, 0);
   }
 
-  const targetMs = next.getTime() + bufferMs; // e.g. :05:20 / :35:20
+  const targetMs = next.getTime() + bufferMs;
   return Math.max(500, targetMs - now.getTime());
 }
 
@@ -301,7 +300,7 @@ const Performance: React.FC = () => {
     // ✅ then smart refresh after :05/:35 forever
     const schedule = () => {
       if (!alive) return;
-      const wait = msUntilNext0535(20); // refresh at :05:20 and :35:20
+      const wait = msUntilNext2050(30); // refresh at :05:20 and :35:20
       timer = window.setTimeout(async () => {
         if (!alive) return;
         await load();
